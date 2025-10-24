@@ -9,6 +9,10 @@ Octagon::Octagon(const std::vector<std::pair<double, double>>& points) {
         throw std::invalid_argument("Octagon must have exactly 8 vertices");
     }
     vertices = points;
+
+    if (!is_valid_polygon(vertices)) {
+        throw std::invalid_argument("Invalid octagon: zero area or invalid vertices");
+    }
 }
 
 Octagon::Octagon(const Octagon& other) : vertices(other.vertices) {}
@@ -68,5 +72,9 @@ void Octagon::read_from_stream(std::istream& is) {
         if (!(is >> vertices[i].first >> vertices[i].second)) {
             throw std::runtime_error("Invalid input for Octagon");
         }
+    }
+    
+    if (!is_valid_polygon(vertices)) {
+        throw std::invalid_argument("Invalid octagon: zero area or invalid vertices");
     }
 }

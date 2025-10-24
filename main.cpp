@@ -5,7 +5,6 @@
 #include "include/array.h"
 
 #include <iostream>
-#include <memory>
 #include <vector>
 
 void print_menu() {
@@ -32,26 +31,41 @@ int main() {
             switch (choice) {
                 case 1: {
                     std::cout << "Enter 6 vertices (x y) for Hexagon:" << std::endl;
-                    auto hexagon = std::make_shared<Hexagon>(); //std::make_shared создает умный указатель и возвращает на него std::shared_ptr
-                    std::cin >> *hexagon;
-                    figure_array.add_figure(hexagon);
-                    std::cout << "Hexagon added successfully!" << std::endl;
+                    Hexagon* hexagon = new Hexagon();
+                    try {
+                        std::cin >> *hexagon;
+                        figure_array.add_figure(hexagon);
+                        std::cout << "Hexagon added successfully!" << std::endl;
+                    } catch (const std::exception& e) {
+                        delete hexagon;
+                        throw;
+                    }
                     break;
                 }
                 case 2: {
                     std::cout << "Enter 8 vertices (x y) for Octagon:" << std::endl;
-                    auto octagon = std::make_shared<Octagon>();
-                    std::cin >> *octagon;
-                    figure_array.add_figure(octagon);
-                    std::cout << "Octagon added successfully!" << std::endl;
+                    Octagon* octagon = new Octagon();
+                    try {
+                        std::cin >> *octagon;
+                        figure_array.add_figure(octagon);
+                        std::cout << "Octagon added successfully!" << std::endl;
+                    } catch (const std::exception& e) {
+                        delete octagon;
+                        throw;
+                    }
                     break;
                 }
                 case 3: {
                     std::cout << "Enter 3 vertices (x y) for Triangle:" << std::endl;
-                    auto triangle = std::make_shared<Triangle>();
-                    std::cin >> *triangle;
-                    figure_array.add_figure(triangle);
-                    std::cout << "Triangle added successfully!" << std::endl;
+                    Triangle* triangle = new Triangle(); 
+                    try {
+                        std::cin >> *triangle;
+                        figure_array.add_figure(triangle);
+                        std::cout << "Triangle added successfully!" << std::endl;
+                    } catch (const std::exception& e) {
+                        delete triangle;
+                        throw;
+                    }
                     break;
                 }
                 case 4: {

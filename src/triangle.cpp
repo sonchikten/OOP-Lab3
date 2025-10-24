@@ -9,6 +9,10 @@ Triangle::Triangle(const std::vector<std::pair<double, double>>& points) {
         throw std::invalid_argument("Triangle must have exactly 3 vertices");
     }
     vertices = points;
+    
+    if (!is_valid_polygon(vertices)) {
+        throw std::invalid_argument("Invalid triangle: zero area or collinear points");
+    }
 }
 
 Triangle::Triangle(const Triangle& other) : vertices(other.vertices) {}
@@ -66,5 +70,9 @@ void Triangle::read_from_stream(std::istream& is) {
         if (!(is >> vertices[i].first >> vertices[i].second)) {
             throw std::runtime_error("Invalid input for Triangle");
         }
+    }
+    
+    if (!is_valid_polygon(vertices)) {
+        throw std::invalid_argument("Invalid triangle: zero area or collinear points");
     }
 }

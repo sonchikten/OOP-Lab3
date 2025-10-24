@@ -19,6 +19,8 @@ public:
     operator double() const; //приведенеие к double вызывает area()
 };
 
+bool is_valid_polygon(const std::vector<std::pair<double, double>>& vertices);
+
 std::ostream& operator<<(std::ostream& os, const Figure& fig);
 std::istream& operator>>(std::istream& is, Figure& fig);
 

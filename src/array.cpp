@@ -1,12 +1,20 @@
 #include "../include/array.h"
 #include <iostream>
 
-void FigureArray::add_figure(std::shared_ptr<Figure> fig) {
+FigureArray::~FigureArray() {
+    for (auto fig : figures) {
+        delete fig; //освобождаем память для каждого указателя
+    }
+    figures.clear();
+}
+
+void FigureArray::add_figure(Figure* fig) {
     figures.push_back(fig);
 }
 
 void FigureArray::remove_figure(size_t index) {
     if (index < figures.size()) {
+        delete figures[index];
         figures.erase(figures.begin() + index);
     }
 }
@@ -37,7 +45,7 @@ size_t FigureArray::size() const {
     return figures.size();
 }
 
-std::shared_ptr<Figure> FigureArray::operator[](size_t index) const {
+Figure* FigureArray::operator[](size_t index) const {
     if (index >= figures.size()) {
         throw std::out_of_range("Index out of range");
     }

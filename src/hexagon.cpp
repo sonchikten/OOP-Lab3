@@ -9,6 +9,10 @@ Hexagon::Hexagon(const std::vector<std::pair<double, double>>& points) {
         throw std::invalid_argument("Hexagon must have exactly 6 vertices");
     }
     vertices = points;
+    
+    if (!is_valid_polygon(vertices)) {
+        throw std::invalid_argument("Invalid hexagon: zero area or invalid vertices");
+    }
 }
 
 Hexagon::Hexagon(const Hexagon& other) : vertices(other.vertices) {}
@@ -68,5 +72,9 @@ void Hexagon::read_from_stream(std::istream& is) {
         if (!(is >> vertices[i].first >> vertices[i].second)) {
             throw std::runtime_error("Invalid input for Hexagon");
         }
+    }
+
+    if (!is_valid_polygon(vertices)) {
+        throw std::invalid_argument("Invalid hexagon: zero area or invalid vertices");
     }
 }
