@@ -6,7 +6,7 @@
 
 #include <iostream>
 #include <vector>
-#include <limits>  // Добавить этот include
+#include <limits>
 
 void print_menu() {
     std::cout << "\n=== Figure Management System ===" << std::endl;
