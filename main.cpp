@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <vector>
+#include <limits>  // Добавить этот include
 
 void print_menu() {
     std::cout << "\n=== Figure Management System ===" << std::endl;
@@ -38,7 +39,9 @@ int main() {
                         std::cout << "Hexagon added successfully!" << std::endl;
                     } catch (const std::exception& e) {
                         delete hexagon;
-                        throw;
+                        std::cout << "Error creating Hexagon: " << e.what() << std::endl;
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                     }
                     break;
                 }
@@ -51,20 +54,24 @@ int main() {
                         std::cout << "Octagon added successfully!" << std::endl;
                     } catch (const std::exception& e) {
                         delete octagon;
-                        throw;
+                        std::cout << "Error creating Octagon: " << e.what() << std::endl;
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                     }
                     break;
                 }
                 case 3: {
                     std::cout << "Enter 3 vertices (x y) for Triangle:" << std::endl;
-                    Triangle* triangle = new Triangle(); 
+                    Triangle* triangle = new Triangle();
                     try {
                         std::cin >> *triangle;
                         figure_array.add_figure(triangle);
                         std::cout << "Triangle added successfully!" << std::endl;
                     } catch (const std::exception& e) {
                         delete triangle;
-                        throw;
+                        std::cout << "Error creating Triangle: " << e.what() << std::endl;
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                     }
                     break;
                 }
@@ -95,7 +102,7 @@ int main() {
                 }
             }
         } catch (const std::exception& e) {
-            std::cout << "Error: " << e.what() << std::endl;
+            std::cout << "Unexpected error: " << e.what() << std::endl;
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
