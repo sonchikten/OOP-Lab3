@@ -12,7 +12,7 @@ private:
 public:
     FigureArray();
     ~FigureArray();
-    void add_figure(Figure* fig); //изменили на обычный указатель
+    void add_figure(Figure* fig);
     void remove_figure(size_t index);
     void print_all_info() const;
     double total_area() const; //сумирует площади всех фигур в массиве

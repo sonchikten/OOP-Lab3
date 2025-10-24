@@ -257,7 +257,6 @@ TEST(FigureArrayTest, AccessOperator) {
     auto retrieved = array[0];
     EXPECT_NEAR(retrieved->area(), 0.5, 1e-6);
     
-    // Очистка памяти
     array.remove_figure(0);
 }
 
@@ -326,7 +325,6 @@ TEST(ExceptionTest, InvalidIndex) {
     array.add_figure(triangle);
     EXPECT_THROW(array[1], std::out_of_range);
     
-    // Очистка памяти
     array.remove_figure(0);
 }
 
@@ -345,7 +343,6 @@ TEST(MixedFiguresTest, DifferentTypesInArray) {
     EXPECT_EQ(array.size(), 3);
     EXPECT_NEAR(array.total_area(), 22.0, 1e-6); // 2 + 6 + 14 = 22
     
-    // Очистка памяти
     while (array.size() > 0) {
         array.remove_figure(0);
     }
